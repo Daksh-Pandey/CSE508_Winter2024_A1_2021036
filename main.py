@@ -2,6 +2,8 @@ import time
 import preprocessing
 import unigram_inverted_index
 import boolean_queries
+import positional_index
+import phrase_queries
 
 loop = True
 
@@ -14,11 +16,14 @@ while(loop):
     print("Choose below options to perform:")
     print("[1] Preprocess text files")
     print("[2] Construct unigram inverted index")
-    print("[3] Enter a boolean query to the inverted index")
-    print("[5] Exit")
+    print("[3] Enter boolean query to the inverted index")
+    print("[4] Construct positional index")
+    print("[5] Enter phrase query to positional index")
+    print("[6] Exit")
     print("==============================================================================")
 
     option = int(input("Enter option: "))
+
     if option == 1:
         preprocessing.preProcess()
         print("\nAll text files preprocessed!!")
@@ -38,8 +43,17 @@ while(loop):
             operations.append(ops)
         boolean_queries.execQueries(n, inputs, operations)
 
+    elif option == 4:
+        positional_index.indexAllFiles()
+        print("\nCreated positional index!!")
+
     elif option == 5:
+        n = int(input())
+        textList = []
+        for i in range(n):
+            text = input()
+            textList.append(text)
+        phrase_queries.execQueries(n, textList)
+
+    elif option == 6:
         loop = False
-
-
-
